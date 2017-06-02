@@ -7,8 +7,8 @@
     <ProjectGuid>{CF6F31AA-C21F-45CE-8F53-60154EFCFEDB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
-    <AssemblyName>ConsoleApplication1</AssemblyName>
+    <RootNamespace>AsyncLab</RootNamespace>
+    <AssemblyName>AsyncLab</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
