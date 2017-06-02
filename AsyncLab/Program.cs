@@ -18,30 +18,31 @@ namespace AsyncLab
             while (true)
             {
                 var inicio = DateTime.Now;
-                // Chamada assíncrona
-                Task task = prog.ExecutaTarefasAsync();
-                task.Wait();
+                
+                // Asynchronous call
+                //Task task = prog.ExecuteBigTaskAsync();
+                //task.Wait();
 
-                // Chamada síncrona
-                //prog.ExecutaTarefas();
+                // Synchronous call
+                prog.ExecuteBigTask();
 
-                Console.WriteLine("Tempo de execução: {0}", DateTime.Now - inicio);
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.WriteLine("Execution time: {0}", DateTime.Now - inicio);
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 Console.WriteLine();
             }
         }
 
-        void ExecutaTarefas()
+        void ExecuteBigTask()
         {
-            Console.WriteLine("Criando as tasks...");
+            Console.WriteLine("Starting the tasks...");
             var tasks = new List<Task>();
             for (int i = 1; i <= NUM_TASKS; i++)
             {
-                tasks.Add(ProcessamentoAsync(i));
+                tasks.Add(ExecuteSmallTaskAsync(i));
             }
 
-            Console.WriteLine("Vai aguardar...");
+            Console.WriteLine("Waiting for the tasks to finish...");
             foreach(var task in tasks)
             {
                 task.Wait();
@@ -49,27 +50,27 @@ namespace AsyncLab
 
         }
 
-        async Task ExecutaTarefasAsync()
+        async Task ExecuteBigTaskAsync()
         {
-            Console.WriteLine("Criando as tasks...");
+            Console.WriteLine("Starting the tasks...");
             var tasks = new List<Task>();
             for (int i = 1; i <= NUM_TASKS; i++)
             {
-                tasks.Add(ProcessamentoAsync(i));
+                tasks.Add(ExecuteSmallTaskAsync(i));
             }
 
-            Console.WriteLine("Vai aguardar...");
+            Console.WriteLine("Waiting for the tasks to finish...");
             foreach (var task in tasks)
             {
                 await task;
             }
         }
 
-        async Task ProcessamentoAsync(int id)
+        async Task ExecuteSmallTaskAsync(int id)
         {
             int delay = rnd.Next(MAX_SECONDS) + 1;
-            await Task.Delay(delay * 1000);
-            Console.WriteLine("Concluída task {0} em {1}s.", id, delay);
+            await Task.Delay(delay * 1000); // here it would do some real work...
+            Console.WriteLine("Task {0} finnished in {1} seconds.", id, delay);
         }
 
     }
